@@ -6,7 +6,7 @@ val hairItems: Array<CatalogueItem> = arrayOf(
     CatalogueItem(
         id = "1",
         name = "Термобрашинг для укладки волос",
-        description = "Высококачественный термобрашинг EXPERT BLOWOUT SHINE Wavy Bristles от Olivia Garden. Щетина брашинга, изготовленная из специального термостойкого нейлона, имеет волнистую форму и менее острые кончики.",
+        description = "Высококачественный термобрашинг EXPERT BLOWOUT SHINE Wavy Bristles от Olivia Garden.",
         price = 1073,
         imageUrl = "https://avatars.mds.yandex.net/get-mpic/1568604/img_id7206040765875739675.jpeg/optimize"
     ),

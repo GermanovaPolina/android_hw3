@@ -106,7 +106,8 @@ fun CatalogueScreen(
         LazyColumn(
             contentPadding = PaddingValues(
                 bottom = paddingValues.calculateBottomPadding()
-            )
+            ),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(items = catalogueItems) { item ->
                 CatalogueCard(
