@@ -6,9 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -39,14 +37,13 @@ fun MainScreen() {
             BottomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
-        NavigationGraph(navController = navController, modifier = Modifier, paddingValues)
+        NavigationGraph(navController = navController, paddingValues)
     }
 }
 
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    modifier: Modifier = Modifier,
     paddingValues: PaddingValues
 ) {
     NavHost(navController = navController, startDestination = BottomNavItem.Catalogue.route) {

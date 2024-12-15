@@ -6,15 +6,15 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.homework.hw3.data.CatalogueItemType
+import kotlinx.coroutines.launch
 
 @Composable
 fun CarouselFilter(
-    onFilterSelected: (CatalogueItemType) -> Unit,
+    onFilterSelected: suspend (CatalogueItemType) -> Unit,
     selectedFilter: CatalogueItemType? = null
 ) {
     val filters = listOf(CatalogueItemType.Hair, CatalogueItemType.Nails, CatalogueItemType.Soap)
@@ -38,10 +38,16 @@ fun CarouselFilter(
 private fun FilterButton(
     filter: CatalogueItemType,
     isSelected: Boolean,
-    onFilterSelected: (CatalogueItemType) -> Unit
+    onFilterSelected: suspend (CatalogueItemType) -> Unit
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Button(
-        onClick = { onFilterSelected(filter) },
+        onClick = {
+            coroutineScope.launch {
+                onFilterSelected(filter)
+            }
+        },
         modifier = Modifier.background(if (isSelected) Color.Black else Color.White)
     ) {
         Text(text = filter.toString(), style = MaterialTheme.typography.labelLarge)
