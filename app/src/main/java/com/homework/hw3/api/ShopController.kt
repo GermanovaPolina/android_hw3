@@ -22,21 +22,24 @@ class ShopController {
         }
     }
 
-    suspend fun getItem(id: String): CatalogueItem {
+    suspend fun getCardItems(ids: Array<String>): Array<CatalogueItem> {
         delay(delayMs)
 
-        hairItems.map {
-            if (it.id == id) {
-                return it
+        val items = mutableListOf<CatalogueItem>()
+        ids.forEach { id ->
+            hairItems.map {
+                if (it.id == id) {
+                    items.add(it)
+                }
+            }
+
+            nailsItems.map {
+                if (it.id == id) {
+                    items.add(it)
+                }
             }
         }
 
-        nailsItems.map {
-            if (it.id == id) {
-                return it
-            }
-        }
-
-        throw Exception("No such element")
+        return items.toTypedArray()
     }
 }
