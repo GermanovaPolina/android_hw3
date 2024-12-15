@@ -37,7 +37,7 @@ fun CatalogueScreen(
 
     val itemType = rememberSaveable { CatalogueItemType.Hair }
     val (catalogueItems, setCatalogueItems) = rememberSaveable { mutableStateOf(emptyArray<CatalogueItem>()) }
-    val (cart, setCart) = rememberSaveable { mutableStateOf(cartManager.getCart()) }
+    val (cart, setCart) = remember { mutableStateOf(cartManager.getCart()) }
 
     val (loading, setLoading) = remember { mutableStateOf(false) }
     val isFirstLaunch = rememberSaveable { mutableStateOf(true) }

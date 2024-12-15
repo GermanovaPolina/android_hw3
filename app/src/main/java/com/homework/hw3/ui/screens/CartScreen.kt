@@ -38,7 +38,7 @@ fun CartScreen(paddingValues: PaddingValues) {
     val shopController = ShopController()
 
     val (catalogueItems, setCatalogueItems) = rememberSaveable { mutableStateOf(emptyArray<CatalogueItem>()) }
-    val (cart, setCart) = rememberSaveable { mutableStateOf(cartManager.getCart()) }
+    val (cart, setCart) = remember { mutableStateOf(cartManager.getCart()) }
     val totalPrice = remember(cart, catalogueItems) {
         catalogueItems.fold(0) { acc, c ->
             acc + c.price * (cart[c.id] ?: 0)

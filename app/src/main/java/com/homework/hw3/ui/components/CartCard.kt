@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.homework.hw3.data.CardType
 import com.homework.hw3.data.CatalogueItem
 
 @Composable
@@ -60,11 +61,12 @@ fun CartCard(
                 style = MaterialTheme.typography.bodyLarge
             )
 
-            Button(
-                onClick = { addToCard(item.id, 1) },
-            ) {
-                Text("Add to Cart $quantity")
-            }
+            AddToCartButton(
+                id = item.id,
+                quantity = quantity,
+                addToCard = addToCard,
+                type = CardType.Cart,
+            )
         }
     }
 }

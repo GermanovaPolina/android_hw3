@@ -17,6 +17,11 @@ class CartManager(context: Context) {
     fun updateCart(productId: String, delta: Int): Map<String, Int> {
         val cart = getCart().toMutableMap()
         cart[productId] = (cart[productId] ?: 0) + delta
+
+        if (cart[productId] == 0) {
+            cart.remove(productId)
+        }
+
         val editor = sharedPrefs.edit()
         editor.putString("cartData", gson.toJson(cart))
         editor.apply()
