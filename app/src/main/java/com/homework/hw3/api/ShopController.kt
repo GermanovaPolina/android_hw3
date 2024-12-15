@@ -21,4 +21,22 @@ class ShopController {
             CatalogueItemType.Soap -> soapItems
         }
     }
+
+    suspend fun getItem(id: String): CatalogueItem {
+        delay(delayMs)
+
+        hairItems.map {
+            if (it.id == id) {
+                return it
+            }
+        }
+
+        nailsItems.map {
+            if (it.id == id) {
+                return it
+            }
+        }
+
+        throw Exception("No such element")
+    }
 }

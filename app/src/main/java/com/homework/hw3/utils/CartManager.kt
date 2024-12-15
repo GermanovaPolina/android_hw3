@@ -9,17 +9,18 @@ class CartManager(context: Context) {
     private val sharedPrefs: SharedPreferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE)
     private val gson = Gson()
 
-    fun getCart(): Map<Int, Int> {
+    fun getCart(): Map<String, Int> {
         val cartJson = sharedPrefs.getString("cartData", "{}") ?: "{}"
-        return gson.fromJson(cartJson, object : TypeToken<Map<Int, Int>>() {}.type)
+        return gson.fromJson(cartJson, object : TypeToken<MutableMap<String, Int>>() {}.type)
     }
 
-    fun updateCart(productId: Int, delta: Int) {
+    fun updateCart(productId: String, delta: Int): Map<String, Int> {
         val cart = getCart().toMutableMap()
         cart[productId] = (cart[productId] ?: 0) + delta
         val editor = sharedPrefs.edit()
         editor.putString("cartData", gson.toJson(cart))
         editor.apply()
+        return cart
     }
 
     fun clearCart() {

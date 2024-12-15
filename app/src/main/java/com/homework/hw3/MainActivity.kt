@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
-    Text("Online Shop")
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Online Shop") })
