@@ -78,7 +78,10 @@ private fun QuantitySelector(
     Row(
         modifier = Modifier
             .height(39.dp)
-            .background(SecondaryColor, RoundedCornerShape(100.dp)),
+            .background(
+                if (type == CardType.Catalogue) SecondaryColor else Color.Transparent,
+                RoundedCornerShape(100.dp),
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(modifier = Modifier.width(8.dp))

@@ -99,6 +99,8 @@ fun CatalogueScreen(
             onFilterSelected = selectFilter,
             selectedFilter = itemType,
         )
+        Spacer(modifier = Modifier.height(4.dp))
+
         if (loading) {
             Spinner()
             return
