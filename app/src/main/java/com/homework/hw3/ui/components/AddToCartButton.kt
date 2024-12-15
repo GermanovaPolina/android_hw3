@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Minimize
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -48,7 +50,7 @@ fun AddToCartButton(
 }
 
 @Composable
-fun QuantitySelector(
+private fun QuantitySelector(
     quantity: Int,
     onQuantityChange: (Int) -> Unit,
 ) {
@@ -63,7 +65,7 @@ fun QuantitySelector(
             enabled = quantity != 0,
         ) {
             Icon(
-                Icons.Filled.Close,
+                Icons.Filled.Remove,
                 contentDescription = "Decrease Quantity"
             )
         }

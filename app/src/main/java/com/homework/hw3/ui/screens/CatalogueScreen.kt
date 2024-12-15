@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.homework.hw3.api.ShopController
 import com.homework.hw3.data.CatalogueItem
 import com.homework.hw3.data.CatalogueItemType
+import com.homework.hw3.ui.components.CarouselFilter
 import com.homework.hw3.ui.components.CatalogueCard
 import com.homework.hw3.utils.CartManager
 
@@ -35,7 +36,7 @@ fun CatalogueScreen(
     val shopController = ShopController()
     val cartManager = CartManager(context)
 
-    val itemType = rememberSaveable { CatalogueItemType.Hair }
+    val (itemType, setItemType) = rememberSaveable { mutableStateOf(CatalogueItemType.Hair) }
     val (catalogueItems, setCatalogueItems) = rememberSaveable { mutableStateOf(emptyArray<CatalogueItem>()) }
     val (cart, setCart) = remember { mutableStateOf(cartManager.getCart()) }
 
@@ -57,6 +58,17 @@ fun CatalogueScreen(
         }
     }
 
+    LaunchedEffect(key1 = itemType) {
+        if (!isFirstLaunch.value) {
+            setLoading(true)
+
+            val items = shopController.getItems(itemType)
+            setCatalogueItems(items)
+
+            setLoading(false)
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,8 +77,13 @@ fun CatalogueScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Catalogue Screen")
+        CarouselFilter(
+            onFilterSelected = setItemType,
+            selectedFilter = itemType,
+        )
         if (loading) {
             CircularProgressIndicator(modifier = Modifier.size(40.dp))
+            return
         }
         LazyColumn(
             contentPadding = PaddingValues(

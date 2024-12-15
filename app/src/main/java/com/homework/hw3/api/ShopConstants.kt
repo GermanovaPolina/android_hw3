@@ -62,20 +62,6 @@ val nailsItems: Array<CatalogueItem> = arrayOf(
         price = 161,
         imageUrl = "https://avatars.mds.yandex.net/get-mpic/13695166/2a00000192433e0ff785b413c96aff39a535/optimize",
     ),
-    CatalogueItem(
-        id = "9",
-        name = "Маникюрный набор Zinger",
-        description = "Стильный и солидный набор инструментов для маникюра и педикюра Zinger MS-1401 в футляре, верхняя часть которого выполнена из натуральной кожи, а внутренняя из велюра.",
-        price = 3776,
-        imageUrl = "https://avatars.mds.yandex.net/get-mpic/4529531/2a0000018a88f5852af423c9e32f15d2d30d/optimize",
-    ),
-    CatalogueItem(
-        id = "10",
-        name = "БиоВоск питательный",
-        description = "Комплекс из натуральных компонентов питает, смягчает и защищает ногтевую пластину и кутикулу. Экстракты стимулируют регенерацию кожи, укрепляют и улучшают рост ногтей, способствуют быстрому заживлению мелких ран и порезов.",
-        price = 574,
-        imageUrl = "https://avatars.mds.yandex.net/get-mpic/11368570/2a0000018b1ff0b51d9b6eb80fafaad61a28/optimize",
-    ),
 )
 
 val soapItems: Array<CatalogueItem> = emptyArray()
