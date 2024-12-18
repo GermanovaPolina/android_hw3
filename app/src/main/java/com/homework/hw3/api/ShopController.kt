@@ -5,7 +5,7 @@ import com.homework.hw3.data.CatalogueItemType
 import kotlinx.coroutines.delay
 
 class ShopController {
-    private val delayMs = 0L
+    private val delayMs = 500L
     private val error = false
 
     suspend fun getItems(type: CatalogueItemType): Array<CatalogueItem> {

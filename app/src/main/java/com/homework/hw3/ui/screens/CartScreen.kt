@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.homework.hw3.api.ShopController
 import com.homework.hw3.data.CatalogueItem
 import com.homework.hw3.ui.components.CartCard
+import com.homework.hw3.ui.components.CartInfo
 import com.homework.hw3.ui.components.Spinner
 import com.homework.hw3.ui.theme.BaseColor
 import com.homework.hw3.ui.theme.SecondaryColor
@@ -114,7 +115,7 @@ fun CartScreen(paddingValues: PaddingValues) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Товары: $totalQuantity Сумма: $totalPrice")
+        CartInfo(totalQuantity, totalPrice)
 
         Spacer(modifier = Modifier.height(16.dp))
 

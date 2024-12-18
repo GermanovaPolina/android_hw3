@@ -10,6 +10,6 @@ import androidx.compose.ui.Modifier
 @Composable
 fun ProfileScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Not implemented")
+        Text("Не реализовано")
     }
 }

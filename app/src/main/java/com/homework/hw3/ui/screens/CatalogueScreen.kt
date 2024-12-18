@@ -104,6 +104,9 @@ fun CatalogueScreen(
         if (loading) {
             Spinner()
             return
+        } else if (catalogueItems.isEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Нет товаров")
         }
         LazyColumn(
             contentPadding = PaddingValues(
