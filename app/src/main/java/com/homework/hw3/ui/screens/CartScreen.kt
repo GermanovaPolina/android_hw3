@@ -111,36 +111,36 @@ fun CartScreen(paddingValues: PaddingValues) {
                     addToCard = addToCard,
                 )
             }
+
+            item {
+                CartInfo(totalQuantity, totalPrice)
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = { },
+                    contentPadding = PaddingValues(8.dp),
+                    shape = RoundedCornerShape(100.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = SecondaryColor,
+                        contentColor = Color.Black,
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        text = "Оформить заказ",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Icon(
+                        Icons.AutoMirrored.Outlined.ArrowForward,
+                        contentDescription = "Добавить в корзину",
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(paddingValues.calculateBottomPadding()))
+            }
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        CartInfo(totalQuantity, totalPrice)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = { },
-            contentPadding = PaddingValues(8.dp),
-            shape = RoundedCornerShape(100.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = SecondaryColor,
-                contentColor = Color.Black,
-            ),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(
-                text = "Оформить заказ",
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Icon(
-                Icons.AutoMirrored.Outlined.ArrowForward,
-                contentDescription = "Добавить в корзину",
-            )
-        }
-
-        Spacer(modifier = Modifier.height(paddingValues.calculateBottomPadding()))
     }
 }
