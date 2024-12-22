@@ -11,10 +11,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.homework.hw3.data.BottomNavItem
+import com.homework.hw3.data.CatalogueItem
 import com.homework.hw3.ui.components.BottomNavigationBar
 import com.homework.hw3.ui.screens.CartScreen
 import com.homework.hw3.ui.screens.CatalogueScreen
+import com.homework.hw3.ui.screens.ItemScreen
 import com.homework.hw3.ui.screens.ProfileScreen
 
 class MainActivity : ComponentActivity() {
@@ -48,13 +51,21 @@ fun NavigationGraph(
 ) {
     NavHost(navController = navController, startDestination = BottomNavItem.Catalogue.route) {
         composable(BottomNavItem.Catalogue.route) {
-            CatalogueScreen(paddingValues)
+            CatalogueScreen(paddingValues) { item ->
+                navController.navigate(route = item)
+            }
         }
         composable(BottomNavItem.Profile.route) {
             ProfileScreen()
         }
         composable(BottomNavItem.Cart.route) {
-            CartScreen(paddingValues)
+            CartScreen(paddingValues) { item ->
+                navController.navigate(route = item)
+            }
+        }
+        composable<CatalogueItem> { backStackEntry ->
+            val item: CatalogueItem = backStackEntry.toRoute()
+            ItemScreen(item)
         }
     }
 }

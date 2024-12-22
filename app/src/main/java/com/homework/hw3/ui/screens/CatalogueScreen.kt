@@ -40,7 +40,8 @@ import com.homework.hw3.utils.CartManager
 
 @Composable
 fun CatalogueScreen(
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onNavigateToItemScreen: (CatalogueItem) -> Unit
 ) {
     val context = LocalContext.current
     val shopController = ShopController()
@@ -119,6 +120,7 @@ fun CatalogueScreen(
                     item = item,
                     quantity = cart[item.id] ?: 0,
                     addToCard = addToCard,
+                    onNavigateToItemScreen = onNavigateToItemScreen
                 )
             }
         }

@@ -1,5 +1,8 @@
 package com.homework.hw3.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CatalogueItem(
     val id: String,
     val name: String,

@@ -30,7 +30,8 @@ import com.homework.hw3.data.CatalogueItem
 fun CatalogueCard(
     item: CatalogueItem,
     quantity: Int,
-    addToCard: (id: String, delta: Int) -> Unit
+    addToCard: (id: String, delta: Int) -> Unit,
+    onNavigateToItemScreen: (CatalogueItem) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -39,6 +40,9 @@ fun CatalogueCard(
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
+        onClick = {
+            onNavigateToItemScreen(item)
+        }
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp),

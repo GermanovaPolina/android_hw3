@@ -45,7 +45,10 @@ import com.homework.hw3.ui.theme.SecondaryColor
 import com.homework.hw3.utils.CartManager
 
 @Composable
-fun CartScreen(paddingValues: PaddingValues) {
+fun CartScreen(
+    paddingValues: PaddingValues,
+    onNavigateToItemScreen: (CatalogueItem) -> Unit
+) {
     val context = LocalContext.current
     val cartManager = CartManager(context)
     val shopController = ShopController()
@@ -109,6 +112,7 @@ fun CartScreen(paddingValues: PaddingValues) {
                     item = item,
                     quantity = cart[item.id] ?: 0,
                     addToCard = addToCard,
+                    onNavigateToItemScreen = onNavigateToItemScreen
                 )
             }
 
