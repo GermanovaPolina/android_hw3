@@ -77,7 +77,7 @@ fun CatalogueCard(
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
-
+                    Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
                     AddToCartButton(
                         id = item.id,
                         quantity = quantity,

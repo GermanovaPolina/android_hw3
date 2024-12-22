@@ -37,36 +37,31 @@ fun AddToCartButton(
     addToCard: (id: String, delta: Int) -> Unit,
     type: CardType,
 ) {
-    Row(
-        modifier = Modifier
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        if (quantity != 0 || type == CardType.Cart) {
-            QuantitySelector(quantity, type) { delta -> addToCard(id, delta) }
-        } else {
-            Button(
-                onClick = { addToCard(id, 1) },
-                contentPadding = PaddingValues(8.dp),
-                shape = RoundedCornerShape(100.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = SecondaryColor,
-                    contentColor = Color.Black,
-                ),
-            ) {
-                Text(
-                    text = "В корзину",
-                    style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Bold,
-                )
-                Icon(
-                    Icons.Outlined.ShoppingCart,
-                    contentDescription = "Добавить в корзину",
-                )
-            }
+    if (quantity != 0 || type == CardType.Cart) {
+        QuantitySelector(quantity, type) { delta -> addToCard(id, delta) }
+    } else {
+        Button(
+            modifier = Modifier
+                .height(39.dp),
+            onClick = { addToCard(id, 1) },
+            contentPadding = PaddingValues(8.dp),
+            shape = RoundedCornerShape(100.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = SecondaryColor,
+                contentColor = Color.Black,
+            ),
+        ) {
+            Text(
+                text = "В корзину",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Bold,
+            )
+            Icon(
+                Icons.Outlined.ShoppingCart,
+                contentDescription = "Добавить в корзину",
+            )
         }
     }
-
 }
 
 @Composable
