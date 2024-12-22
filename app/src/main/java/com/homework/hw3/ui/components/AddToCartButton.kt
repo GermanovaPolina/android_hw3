@@ -42,7 +42,7 @@ fun AddToCartButton(
     } else {
         Button(
             modifier = Modifier
-                .height(39.dp),
+                .height(40.dp),
             onClick = { addToCard(id, 1) },
             contentPadding = PaddingValues(8.dp),
             shape = RoundedCornerShape(100.dp),
@@ -51,15 +51,18 @@ fun AddToCartButton(
                 contentColor = Color.Black,
             ),
         ) {
+            Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = "В корзину",
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Bold,
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 Icons.Outlined.ShoppingCart,
                 contentDescription = "Добавить в корзину",
             )
+            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }
@@ -72,7 +75,7 @@ private fun QuantitySelector(
 ) {
     Row(
         modifier = Modifier
-            .height(39.dp)
+            .height(40.dp)
             .background(
                 if (type == CardType.Catalogue) SecondaryColor else Color.Transparent,
                 RoundedCornerShape(100.dp),

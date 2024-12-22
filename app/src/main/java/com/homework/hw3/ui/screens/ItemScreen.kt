@@ -71,11 +71,14 @@ fun ItemScreen(item: CatalogueItem) {
             Text(
                 text = item.name,
                 fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                lineHeight = 40.sp
             )
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = item.description
             )
+            Spacer(modifier = Modifier.height(16.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
