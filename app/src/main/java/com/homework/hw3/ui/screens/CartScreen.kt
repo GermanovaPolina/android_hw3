@@ -58,7 +58,7 @@ fun CartScreen(paddingValues: PaddingValues) {
         }
     }
     val totalQuantity = remember(cart) {
-        cart.values.reduce { acc, q -> acc + q }
+        cart.values.reduceOrNull { acc, q -> acc + q } ?: 0
     }
 
     val (loading, setLoading) = remember { mutableStateOf(false) }
@@ -121,6 +121,7 @@ fun CartScreen(paddingValues: PaddingValues) {
                     onClick = { },
                     contentPadding = PaddingValues(8.dp),
                     shape = RoundedCornerShape(100.dp),
+                    enabled = totalQuantity > 0,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = SecondaryColor,
                         contentColor = Color.Black,
