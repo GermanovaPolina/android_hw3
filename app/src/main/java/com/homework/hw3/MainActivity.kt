@@ -14,10 +14,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.homework.hw3.data.BottomNavItem
 import com.homework.hw3.data.CatalogueItem
+import com.homework.hw3.data.Routes
 import com.homework.hw3.ui.components.BottomNavigationBar
 import com.homework.hw3.ui.screens.CartScreen
 import com.homework.hw3.ui.screens.CatalogueScreen
 import com.homework.hw3.ui.screens.ItemScreen
+import com.homework.hw3.ui.screens.PaymentScreen
 import com.homework.hw3.ui.screens.ProfileScreen
 
 class MainActivity : ComponentActivity() {
@@ -58,10 +60,19 @@ fun NavigationGraph(
         composable(BottomNavItem.Profile.route) {
             ProfileScreen()
         }
+        composable(Routes.payment) {
+            PaymentScreen(paddingValues)
+        }
         composable(BottomNavItem.Cart.route) {
-            CartScreen(paddingValues) { item ->
-                navController.navigate(route = item)
-            }
+            CartScreen(
+                paddingValues,
+                onNavigateToItemScreen = { item ->
+                    navController.navigate(route = item)
+                },
+                onNavigateToPayment = {
+                    navController.navigate(Routes.payment)
+                }
+            )
         }
         composable<CatalogueItem> { backStackEntry ->
             val item: CatalogueItem = backStackEntry.toRoute()

@@ -1,5 +1,6 @@
 package com.homework.hw3.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,12 +17,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
-import androidx.compose.material.icons.outlined.ArrowForward
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,25 +35,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.homework.hw3.api.ShopController
 import com.homework.hw3.data.CatalogueItem
-import com.homework.hw3.ui.components.CartCard
 import com.homework.hw3.ui.components.CartInfo
+import com.homework.hw3.ui.components.PaymentMethodCard
 import com.homework.hw3.ui.components.Spinner
 import com.homework.hw3.ui.theme.BaseColor
 import com.homework.hw3.ui.theme.SecondaryColor
 import com.homework.hw3.utils.CartManager
+import com.homework.hw3.utils.PaymentMethodManager
 
 @Composable
-fun CartScreen(
-    paddingValues: PaddingValues,
-    onNavigateToItemScreen: (CatalogueItem) -> Unit,
-    onNavigateToPayment: () -> Unit
+fun PaymentScreen(
+    paddingValues: PaddingValues
 ) {
     val context = LocalContext.current
     val cartManager = CartManager(context)
     val shopController = ShopController()
+    val paymentMethodManager = PaymentMethodManager(context)
 
+    val (paymentMethods, setPaymentMethods) = rememberSaveable { mutableStateOf(paymentMethodManager.getPaymentMethods()) }
     val (catalogueItems, setCatalogueItems) = rememberSaveable { mutableStateOf(emptyArray<CatalogueItem>()) }
-    val (cart, setCart) = remember { mutableStateOf(cartManager.getCart()) }
+    val (cart, _) = remember { mutableStateOf(cartManager.getCart()) }
     val totalPrice = remember(cart, catalogueItems) {
         catalogueItems.fold(0) { acc, c ->
             acc + c.price * (cart[c.id] ?: 0)
@@ -66,9 +65,6 @@ fun CartScreen(
     }
 
     val (loading, setLoading) = remember { mutableStateOf(false) }
-    val addToCard = { id: String, delta: Int ->
-        setCart(cartManager.updateCart(id, delta))
-    }
 
     LaunchedEffect(Unit) {
         setLoading(true)
@@ -77,7 +73,6 @@ fun CartScreen(
 
         setLoading(false)
     }
-
 
     Column(
         modifier = Modifier
@@ -92,7 +87,7 @@ fun CartScreen(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = "Корзина",
+                text = "Оплата",
                 fontSize = 48.sp,
                 fontWeight = FontWeight.ExtraBold,
             )
@@ -108,13 +103,12 @@ fun CartScreen(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(items = catalogueItems) { item ->
-                CartCard(
-                    item = item,
-                    quantity = cart[item.id] ?: 0,
-                    addToCard = addToCard,
-                    onNavigateToItemScreen = onNavigateToItemScreen
-                )
+            items(items = paymentMethods.values.toTypedArray()) { item ->
+                PaymentMethodCard(
+                    item
+                ) { id ->
+                    setPaymentMethods(paymentMethodManager.selectPaymentMethod(id))
+                }
             }
 
             item {
@@ -123,7 +117,9 @@ fun CartScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = onNavigateToPayment,
+                    onClick = {
+                        Toast.makeText(context, "Not implemented", Toast.LENGTH_SHORT).show()
+                    },
                     contentPadding = PaddingValues(8.dp),
                     shape = RoundedCornerShape(100.dp),
                     enabled = totalQuantity > 0,
@@ -134,14 +130,14 @@ fun CartScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text = "Оформить заказ",
+                        text = "Оплатить",
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Icon(
                         Icons.AutoMirrored.Outlined.ArrowForward,
-                        contentDescription = "Добавить в корзину",
+                        contentDescription = "Оплатить",
                     )
                 }
 
