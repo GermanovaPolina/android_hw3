@@ -72,20 +72,15 @@ fun PaymentMethodCard(
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
-//                    .fillMaxWidth()
-////                    .he
                     .width(48.dp)
                     .height(44.dp)
             )
             Text(
                 text = paymentMethod.name,
-                fontWeight = FontWeight.Bold,
-//                style = MaterialTheme.typography.titleLarge
+                fontWeight = FontWeight.Bold
             )
             Text(
-                text = paymentMethod.digits,
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 20.sp
+                text = paymentMethod.digits
             )
         }
     }
