@@ -16,12 +16,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
-import androidx.compose.material.icons.outlined.ArrowForward
-import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,6 +39,7 @@ import com.homework.hw3.ui.components.CartCard
 import com.homework.hw3.ui.components.CartInfo
 import com.homework.hw3.ui.components.Spinner
 import com.homework.hw3.ui.theme.BaseColor
+import com.homework.hw3.ui.theme.PriceFontColor
 import com.homework.hw3.ui.theme.SecondaryColor
 import com.homework.hw3.utils.CartManager
 
@@ -68,6 +67,10 @@ fun CartScreen(
     val (loading, setLoading) = remember { mutableStateOf(false) }
     val addToCard = { id: String, delta: Int ->
         setCart(cartManager.updateCart(id, delta))
+    }
+    val clearCart = {
+        setCart(cartManager.clearCart())
+        setCatalogueItems(emptyArray<CatalogueItem>())
     }
 
     LaunchedEffect(Unit) {
@@ -142,6 +145,29 @@ fun CartScreen(
                     Icon(
                         Icons.AutoMirrored.Outlined.ArrowForward,
                         contentDescription = "Добавить в корзину",
+                    )
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Button(
+                    onClick = clearCart,
+                    contentPadding = PaddingValues(8.dp),
+                    shape = RoundedCornerShape(100.dp),
+                    enabled = totalQuantity > 0,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = PriceFontColor,
+                        contentColor = Color.White,
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        text = "Очистить корзину",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Icon(
+                        Icons.Outlined.Delete,
+                        contentDescription = "Очистить корзину",
                     )
                 }
 
