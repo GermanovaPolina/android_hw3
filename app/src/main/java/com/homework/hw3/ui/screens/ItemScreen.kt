@@ -1,21 +1,31 @@
 package com.homework.hw3.ui.screens
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -28,8 +38,10 @@ import com.homework.hw3.data.CatalogueItem
 import com.homework.hw3.ui.components.AddToCartButton
 import com.homework.hw3.ui.theme.BaseColor
 import com.homework.hw3.ui.theme.PriceFontColor
+import com.homework.hw3.ui.theme.SecondaryColor
 import com.homework.hw3.ui.theme.White
 import com.homework.hw3.utils.CartManager
+
 
 @Composable
 fun ItemScreen(item: CatalogueItem) {
@@ -95,6 +107,33 @@ fun ItemScreen(item: CatalogueItem) {
                     addToCard,
                     CardType.Catalogue
                 )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                modifier = Modifier
+                    .height(40.dp),
+                contentPadding = PaddingValues(8.dp),
+                shape = RoundedCornerShape(100.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = SecondaryColor,
+                    contentColor = Color.Black,
+                ),
+                onClick = {
+                    val share = Intent(Intent.ACTION_SEND)
+                    share.setType("text/plain")
+                    share.putExtra(Intent.EXTRA_TEXT, item.name)
+                    context.startActivity(Intent.createChooser(share, "Отправляем товар"))
+                }
+            ) {
+                Text(
+                    text = "Поделиться"
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Icon(
+                    Icons.Outlined.Share,
+                    contentDescription = "Поделиться товаром"
+                )
+
             }
         }
 
