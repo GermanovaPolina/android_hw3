@@ -9,4 +9,4 @@ data class CatalogueItem(
     val description: String,
     val price: Int,
     val imageUrl: String,
-)
+): java.io.Serializable
